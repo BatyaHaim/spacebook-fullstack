@@ -11,3 +11,16 @@ eventsHandler.registerRemovePost();
 eventsHandler.registerToggleComments();
 eventsHandler.registerAddComment();
 eventsHandler.registerRemoveComment();
+
+$.ajax({
+  method: "GET",
+  url: '/posts',
+  dataType: 'json',
+  success: function(posts) {
+    postsRepository.posts = posts;
+    postsRenderer.renderPosts(postsRepository.posts);
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+    console.log(textStatus);
+  }
+});
